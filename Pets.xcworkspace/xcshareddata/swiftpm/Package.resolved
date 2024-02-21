@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "progresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/relatedcode/ProgressHUD.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "add3cb4c8529139b871b0cf89e393ec42ad63a47"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "80c8b2023a5efb4415a2c615acfec075e5c243d2"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  Pets
+
+  Created by Cristian Serea on 20.02.2024.
+  
+*/
+
+"Done.Button.Title" = "Done";
+"Cancel.Button.Title" = "Cancel";
+"Reset.Button.Title" = "Reset";
+
+"Any.Label.Title" = "Any";
+"Type.Label.Title" = "Type";
+"Miles.Label.Title" = "Miles";
+"Select.Label.Title" = "Tap to select";
+"Change.Label.Title" = "Tap to change";
+"Disabled.Label.Title" = "Available after selecting a location";
+
+"Error.Label.Title" = "Oops...Something went wrong!";
+"Error.KeychainSave.Title" = "An error occurred while saving the item to the Keychain.";
+"Error.KeychainRetrieve.Title" = "An error occurred while retrieving the item from Keychain.";
+
+"SortType.DateShuffled.Title" = "Date shuffled";
+"SortType.DateAscending.Title" = "Date ascending";
+"SortType.DateDescending.Title" = "Date descending";
+"SortType.DistanceAscending.Title" = "Distance ascending";
+"SortType.DistanceDescending.Title" = "Distance descending";
+
+"Pets.NavigationItem.Title" = "Pets 🐶";
+"Fetching.PetsData.Title" = "Fetching pets data";
+"Fetched.PetsData.Title" = "Fetched pets data";
+
+"Settings.NavigationItem.Title" = "Sort & Filter";
