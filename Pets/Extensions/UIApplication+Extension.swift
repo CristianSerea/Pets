@@ -8,11 +8,24 @@
 import UIKit
 
 extension UIApplication {
-    var bottomSafeAreaInsets: CGFloat {
+    var firstKeyWindow: UIWindow? {
         return connectedScenes
             .compactMap({ ($0 as? UIWindowScene)?.windows })
             .flatMap({ $0 })
-            .first(where: { $0.isKeyWindow })?
-            .safeAreaInsets.bottom ?? .zero
+            .first(where: { $0.isKeyWindow })
+    }
+    
+    var topViewController: UIViewController? {
+        var topViewController = firstKeyWindow?.rootViewController
+        
+        while let presentedController = topViewController?.presentedViewController {
+            topViewController = presentedController
+        }
+        
+        return topViewController
+    }
+    
+    var bottomSafeAreaInsets: CGFloat {
+        return firstKeyWindow?.safeAreaInsets.bottom ?? .zero
     }
 }

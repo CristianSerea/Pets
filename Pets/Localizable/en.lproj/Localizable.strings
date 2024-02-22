@@ -12,9 +12,22 @@
 
 "Any.Label.Title" = "Any";
 "Type.Label.Title" = "Type";
-"Miles.Label.Title" = "Miles";
+"Description.Label.Title" = "Description";
+"Contact.Label.Title" = "Contact";
+"Tags.Label.Title" = "Tags";
+"Details.Label.Title" = "Details";
+"Status.Label.Title" = "Status";
+"Species.Label.Title" = "Species";
+"Breed.Label.Title" = "Breed";
+"Color.Label.Title" = "Color";
+"Gender.Label.Title" = "Gender";
+"Age.Label.Title" = "Age";
+"Size.Label.Title" = "Size";
+"Coat.Label.Title" = "Coat";
 "Select.Label.Title" = "Tap to select";
 "Change.Label.Title" = "Tap to change";
+"Miles.Label.Title" = "Miles";
+"MilesAway.Label.Title" = "Miles away";
 "Disabled.Label.Title" = "Available after selecting a location";
 
 "Error.Label.Title" = "Oops...Something went wrong!";
@@ -28,7 +41,7 @@
 "SortType.DistanceDescending.Title" = "Distance descending";
 
 "Pets.NavigationItem.Title" = "Pets 🐶";
-"Fetching.PetsData.Title" = "Fetching pets data";
-"Fetched.PetsData.Title" = "Fetched pets data";
+"Pets.FetchingData.Title" = "Fetching pets data";
+"Pets.NoData.Title" = "There are no pets available matching your selected filters. Please try adjusting your filters.";
 
 "Settings.NavigationItem.Title" = "Sort & Filter";

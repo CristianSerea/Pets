@@ -14,8 +14,12 @@ protocol URLSessionProtocol {
 }
 
 extension URLSessionProtocol {
-    func fetchData<T: Decodable>(withRequest request: URLRequest, type: T.Type) -> Observable<T> {
-        return rxData(request: request)
+    func fetchData<T: Decodable>(withRequest request: URLRequest, type: T.Type,
+                                 withOauthManager oauthManager: OauthManager? = nil) -> Observable<T> {
+        let formattedRequest = getFormattedRequest(withRequest: request,
+                                                   withOauthManager: oauthManager)
+        
+        return rxData(request: formattedRequest)
             .map { data -> T in
                 do {
                     let object = try JSONDecoder().decode(T.self, from: data)
@@ -30,12 +34,13 @@ extension URLSessionProtocol {
                    let data = data {
                     do {
                         let failure = try JSONDecoder().decode(Failure.self, from: data)
-                        if failure.isUnauthorized {
-                            return refreshToken(withRequest: request, type: type)
-                        } else {
-                            return Observable.error(failure)
+                        let observableError: Observable<T> = Observable.error(failure)
+                        
+                        guard failure.isUnauthorized else {
+                            return observableError
                         }
                         
+                        return refreshToken(withRequest: request, type: type, withOauthManager: oauthManager) ?? observableError
                     } catch {
                         throw error
                     }
@@ -46,8 +51,37 @@ extension URLSessionProtocol {
             .observe(on: MainScheduler.instance)
     }
     
-    func refreshToken<T: Decodable>(withRequest request: URLRequest, type: T.Type) -> Observable<T> {
-        return fetchData(withRequest: request, type: type)
+    private func refreshToken<T: Decodable>(withRequest request: URLRequest, type: T.Type,
+                                            withOauthManager oauthManager: OauthManager?) -> Observable<T>? {
+        guard let oauthManager = oauthManager else {
+            return nil
+        }
+        
+        return Observable.create { observer in
+            var fetchDataDisposable: Disposable?
+            
+            oauthManager.fetchData {
+                fetchDataDisposable = fetchData(withRequest: request, type: type, withOauthManager: oauthManager)
+                    .subscribe(observer)
+            }
+            
+            return Disposables.create {
+                fetchDataDisposable?.dispose()
+            }
+        }
+    }
+    
+    private func getFormattedRequest(withRequest request: URLRequest,
+                                     withOauthManager oauthManager: OauthManager? = nil) -> URLRequest {
+        guard let oauth = oauthManager?.oauth else {
+            return request
+        }
+        
+        var formattedRequest = request
+        let parameters = [ParameterConstants.authorization: oauth.token_type + " " + oauth.access_token]
+        formattedRequest.allHTTPHeaderFields = parameters
+        
+        return formattedRequest
     }
 }
 

@@ -231,7 +231,7 @@ extension SettingsViewController {
                                withIndexPath indexPath: IndexPath) {
         presentActionSheetController(withTitle: option?.title, withActionTitles: titles, completion: { [weak self] index in
             let placeholder = titles[index]
-            let value = index == .zero ? nil : actions[index]
+            let value = index == .zero && option?.filter?.filterType != .Distance ? nil : actions[index]
             self?.settingsViewModel?.selectFilter(withIndexPath: indexPath,
                                                   withPlaceholder: placeholder,
                                                   withValue: value)

@@ -168,38 +168,40 @@ extension SettingsViewModel {
         
         var filterSection = value[filterSectionIndex]
         var filterSectionItems = filterSection.items
+        let oldItemValue = filterSectionItems[indexPath.row].filter?.value
         filterSectionItems[indexPath.row].filter?.placeholder = itemPlaceholder
         filterSectionItems[indexPath.row].filter?.value = itemValue
         
         if filterSectionItems[indexPath.row].filter?.filterType == .Location {
             let isEnabled = filterSectionItems[indexPath.row].filter?.value != nil
+            let shouldStop = oldItemValue != nil && isEnabled
             
-            if let index = filterSectionItems.firstIndex(where: { $0.filter?.filterType == .Distance }) {
-                filterSectionItems[index].filter?.value = nil
-                filterSectionItems[index].filter?.placeholder = isEnabled ? Distance.Miles100.localizable : nil
-                filterSectionItems[index].filter?.isEnabled = isEnabled
-            }
-            
-            guard let sortSectionIndex = value.firstIndex(where: { $0.model == .Sort }) else {
-                return
-            }
-            
-            var sortSection = value[sortSectionIndex]
-            var sortSectionItems = sortSection.items
-            
-            sortSectionItems.enumerated().forEach { index, _ in
-                if sortSectionItems[index].canBeDisabled {
-                    sortSectionItems[index].sort?.isSelected = false
-                    sortSectionItems[index].sort?.isEnabled = isEnabled
+            if !shouldStop {
+                if let index = filterSectionItems.firstIndex(where: { $0.filter?.filterType == .Distance }) {
+                    filterSectionItems[index].filter?.value = nil
+                    filterSectionItems[index].filter?.placeholder = isEnabled ? Distance.Miles100.localizable : nil
+                    filterSectionItems[index].filter?.isEnabled = isEnabled
+                }
+                
+                if let sortSectionIndex = value.firstIndex(where: { $0.model == .Sort }) {
+                    var sortSection = value[sortSectionIndex]
+                    var sortSectionItems = sortSection.items
+                    
+                    sortSectionItems.enumerated().forEach { index, _ in
+                        if sortSectionItems[index].canBeDisabled {
+                            sortSectionItems[index].sort?.isSelected = false
+                            sortSectionItems[index].sort?.isEnabled = isEnabled
+                        }
+                    }
+                    
+                    if sortSectionItems.first(where: { $0.sort?.isSelected ?? false }) == nil {
+                        sortSectionItems[.zero].sort?.isSelected = true
+                    }
+                    
+                    sortSection.items = sortSectionItems
+                    value[sortSectionIndex] = sortSection
                 }
             }
-            
-            if sortSectionItems.first(where: { $0.sort?.isSelected ?? false }) == nil {
-                sortSectionItems[.zero].sort?.isSelected = true
-            }
-            
-            sortSection.items = sortSectionItems
-            value[sortSectionIndex] = sortSection
         }
         
         filterSection.items = filterSectionItems

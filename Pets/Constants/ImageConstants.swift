@@ -8,6 +8,16 @@
 import UIKit
 
 struct ImageConstants {
-    static let pawprint = UIImage(systemName: "pawprint.fill")
-    static let slider = UIImage(systemName: "slider.vertical.3")
+    struct SystemName {
+        static let pawprint = "pawprint.circle.fill"
+        static let slider = "slider.vertical.3"
+        static let email = "envelope.fill"
+        static let phone = "phone.fill"
+    }
+    
+    struct Image {
+        static let pawprint = UIImage(systemName: SystemName.pawprint)
+        static let slider = UIImage(systemName: SystemName.slider)
+    }
+    
 }

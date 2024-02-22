@@ -87,6 +87,7 @@ enum PetType: String, CaseIterable {
     case AnySpecies
     case Cat
     case Dog
+    case Rabbit
     
     var localizable: String {
         switch self {

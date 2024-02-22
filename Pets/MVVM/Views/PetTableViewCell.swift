@@ -26,9 +26,9 @@ class PetTableViewCell: UITableViewCell {
 
 extension PetTableViewCell {
     func setupContent(withPet pet: Pet?) {
-        petImageView?.sd_setImage(with: pet?.photos.first?.smallURL,
+        petImageView?.sd_setImage(with: pet?.photos.first?.mediumURL,
                                   placeholderImage: pet?.placeholderImage)
-        titleLabel.text = pet?.name
+        titleLabel.text = pet?.formattedName
         subtitleLabel.text = pet?.speciesGender
         dateLabel.text = pet?.published
         distanceLabel.text = pet?.formattedDistance

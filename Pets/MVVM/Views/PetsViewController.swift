@@ -25,6 +25,7 @@ class PetsViewController: UIViewController {
     private var settingsViewModel: SettingsViewModel?
     private let disposeBag = DisposeBag()
     
+    private var isLoadingData = true
     private var isLoadingMoreData = false {
         didSet {
             updateTableFooter()
@@ -35,13 +36,13 @@ class PetsViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigationBar()
-        registerTableViewCell()
+        registerTableViewCells()
         setupTableRefreshControl()
     }
     
     private func setupNavigationBar() {
         navigationItem.title = LocalizableConstants.petsNavigationItemTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: ImageConstants.slider,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: ImageConstants.Image.slider,
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(openSettings))
@@ -59,9 +60,10 @@ class PetsViewController: UIViewController {
         petsViewControllerDelegate?.openSettings(settingsViewModel: copySettingsViewModel)
     }
     
-    private func registerTableViewCell() {
+    private func registerTableViewCells() {
         let nib = UINib(nibName: GlobalConstants.Identifier.petTableViewCell, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: GlobalConstants.Identifier.petTableViewCell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: GlobalConstants.Identifier.tableViewCell)
     }
     
     private func setupTableRefreshControl() {
@@ -70,13 +72,18 @@ class PetsViewController: UIViewController {
 }
 
 extension PetsViewController {
-    func setupViewModel(withOauth oauth: Oauth) {
-        petsViewModel = PetsViewModel(withOauth: oauth)
+    func setupViewModel(withOauthManager oauthManager: OauthManager?) {
+        guard petsViewModel == nil else {
+            return
+        }
+        
+        petsViewModel = PetsViewModel(withOauthManager: oauthManager)
         
         petsViewModel?.petsWrapper.asObserver()
             .skip(1)
             .bind { [weak self] petsWrapper in
                 ProgressHUD.dismiss()
+                self?.isLoadingData = false
                 self?.isLoadingMoreData = false
                 self?.petsWrapper = petsWrapper
                 self?.tableView.refreshControl?.endRefreshing()
@@ -87,6 +94,7 @@ extension PetsViewController {
         petsViewModel?.error.asObserver()
             .bind { [weak self] error in
                 ProgressHUD.dismiss()
+                self?.isLoadingData = false
                 self?.isLoadingMoreData = false
                 self?.tableView.refreshControl?.endRefreshing()
                 self?.showAlertController(error: error, completion: { [weak self] in
@@ -99,26 +107,39 @@ extension PetsViewController {
     }
     
     private func fetchData() {
-        ProgressHUD.animate(LocalizableConstants.fetchingPetsDataTitle)
+        ProgressHUD.animate(LocalizableConstants.petsFetchingDataTitle)
         petsViewModel?.fetchData()
     }
 }
 
 extension PetsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petsWrapper?.animals.count ?? .zero
+        return isLoadingData ? .zero : max(petsWrapper?.animals.count ?? .zero, 1)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: GlobalConstants.Identifier.petTableViewCell, for: indexPath) as! PetTableViewCell
-        cell.setupContent(withPet: petsWrapper?.animals[indexPath.row])
+        if petsWrapper?.animals.count ?? .zero == .zero {
+            let cell = tableView.dequeueReusableCell(withIdentifier: GlobalConstants.Identifier.tableViewCell, for: indexPath)
+            cell.textLabel?.text = LocalizableConstants.petsNoDataTitle
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textColor = .systemGray
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: GlobalConstants.Identifier.petTableViewCell, for: indexPath) as! PetTableViewCell
+            cell.setupContent(withPet: petsWrapper?.animals[indexPath.row])
 
-        return cell
+            return cell
+        }
     }
 }
 
 extension PetsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard petsWrapper?.animals.count ?? .zero > .zero else {
+            return
+        }
+        
         guard let pet = petsWrapper?.animals[indexPath.row] else {
             return
         }
@@ -127,6 +148,10 @@ extension PetsViewController: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard petsWrapper?.animals.count ?? .zero > .zero else {
+            return
+        }
+        
         guard petsWrapper?.animals.count ?? .zero > .zero else {
             return
         }
@@ -145,7 +170,7 @@ extension PetsViewController: UITableViewDelegate {
 
 extension PetsViewController {
     @objc private func refreshData() {
-        petsViewModel?.fetchData()
+        petsViewModel?.fetchData(withQuery: settingsViewModel?.query)
     }
     
     private func fetchMoreData() {
@@ -154,7 +179,7 @@ extension PetsViewController {
         }
         
         isLoadingMoreData = true
-        petsViewModel?.fetchData(withHref: petsWrapper?.pagination.links.next?.href)
+        petsViewModel?.fetchData(withHref: petsWrapper?.pagination.links?.next?.href)
     }
     
     private func updateTableFooter() {
@@ -171,7 +196,7 @@ extension PetsViewController {
         self.settingsViewModel = settingsViewModel
         
         tableView.setContentOffset(.zero, animated: true)
-        ProgressHUD.animate(LocalizableConstants.fetchingPetsDataTitle)
+        ProgressHUD.animate(LocalizableConstants.petsFetchingDataTitle)
         petsViewModel?.fetchData(withQuery: settingsViewModel?.query)
     }
 }

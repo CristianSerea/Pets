@@ -9,8 +9,7 @@ import Foundation
 import RxSwift
 
 protocol OauthManagerDelegate {
-    func oauthDidFetch(oauth: Oauth)
-    func oauthDidFetch(error: Error)
+    func oauthDidFetch(error: Error?)
 }
 
 class OauthManager {
@@ -21,33 +20,31 @@ class OauthManager {
     
     var oauth: Oauth? {
         didSet {
-            guard let oauth = oauth else {
-                return
-            }
-        
-            oauthManagerDelegate?.oauthDidFetch(oauth: oauth)
+            oauthManagerDelegate?.oauthDidFetch(error: nil)
         }
     }
     
     func loadOauth() {
         retrieveOauth()
     }
-    
-    private func fetchData() {
-        oauthViewModel = OauthViewModel()
-        oauthViewModel?.oauth.asObserver()
-            .bind { [weak self] oauth in
-                self?.saveOauth(withOauth: oauth)
-            }
-            .disposed(by: disposeBag)
+
+    func fetchData(completion: (() -> Void)? = nil) {
+        if oauthViewModel == nil {
+            oauthViewModel = OauthViewModel()
+            oauthViewModel?.oauth.asObserver()
+                .bind { [weak self] oauth in
+                    self?.saveOauth(withOauth: oauth)
+                }
+                .disposed(by: disposeBag)
+            
+            oauthViewModel?.error.asObserver()
+                .bind { [weak self] error in
+                    self?.oauthManagerDelegate?.oauthDidFetch(error: error)
+                }
+                .disposed(by: disposeBag)
+        }
         
-        oauthViewModel?.error.asObserver()
-            .bind { [weak self] error in
-                self?.oauthManagerDelegate?.oauthDidFetch(error: error)
-            }
-            .disposed(by: disposeBag)
-        
-        oauthViewModel?.fetchData()
+        oauthViewModel?.fetchData(completion: completion)
     }
 }
 

@@ -20,7 +20,7 @@ class OauthViewModel {
         self.session = session ?? URLSession(configuration: .default)
     }
     
-    func fetchData() {
+    func fetchData(completion: (() -> Void)? = nil) {
         guard let url = URL(string: GlobalConstants.Server.domain + GlobalConstants.Server.oauth) else {
             return
         }
@@ -35,6 +35,7 @@ class OauthViewModel {
             .subscribe(
                 onNext: { [weak self] oauth in
                     self?.oauth.onNext(oauth)
+                    completion?()
                 },
                 onError: { [weak self] error in
                     self?.error.onNext(error)

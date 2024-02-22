@@ -49,6 +49,10 @@
 		949851862B849C3C0054B8E8 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949851852B849C3C0054B8E8 /* String+Extension.swift */; };
 		949851882B849C710054B8E8 /* LocalizableConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949851872B849C710054B8E8 /* LocalizableConstants.swift */; };
 		9498518C2B849DB00054B8E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9498518E2B849DB00054B8E8 /* Localizable.strings */; };
+		94A38ACE2B867792003246D3 /* PetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A38ACD2B867792003246D3 /* PetDetailsView.swift */; };
+		94A38AD22B867BC0003246D3 /* Pet.json in Resources */ = {isa = PBXBuildFile; fileRef = 94A38AD12B867BC0003246D3 /* Pet.json */; };
+		94A38AD42B8692A4003246D3 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A38AD32B8692A4003246D3 /* Attribute.swift */; };
+		94A38AD62B86AB14003246D3 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A38AD52B86AB14003246D3 /* Media.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +120,10 @@
 		949851872B849C710054B8E8 /* LocalizableConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableConstants.swift; sourceTree = "<group>"; };
 		9498518D2B849DB00054B8E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		949851912B84A2160054B8E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		94A38ACD2B867792003246D3 /* PetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetDetailsView.swift; sourceTree = "<group>"; };
+		94A38AD12B867BC0003246D3 /* Pet.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Pet.json; sourceTree = "<group>"; };
+		94A38AD32B8692A4003246D3 /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		94A38AD52B86AB14003246D3 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		9E83C201E318A9636C9A5110 /* Pods-Pets-PetsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets-PetsUITests.release.xcconfig"; path = "Target Support Files/Pods-Pets-PetsUITests/Pods-Pets-PetsUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AFA04751444E8A580EFF8EE5 /* Pods-Pets-PetsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pets-PetsUITests.debug.xcconfig"; path = "Target Support Files/Pods-Pets-PetsUITests/Pods-Pets-PetsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F9357C69A8300908A01CAB0E /* Pods-PetsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetsTests.debug.xcconfig"; path = "Target Support Files/Pods-PetsTests/Pods-PetsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -215,6 +223,7 @@
 			children = (
 				9498513B2B83FE800054B8E8 /* AppDelegate.swift */,
 				949851442B83FE810054B8E8 /* Assets.xcassets */,
+				94A38AD12B867BC0003246D3 /* Pet.json */,
 				947EDDCB2B85DA4F006CAB7E /* Enumerations */,
 				949851712B8492310054B8E8 /* Constants */,
 				949851702B8492220054B8E8 /* Coordinator */,
@@ -270,6 +279,7 @@
 		9498516D2B8491C50054B8E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				94A38ACD2B867792003246D3 /* PetDetailsView.swift */,
 				9498513F2B83FE800054B8E8 /* PetsViewController.swift */,
 				949851772B84989E0054B8E8 /* PetsViewController.xib */,
 				947EDDC12B853B3F006CAB7E /* PetTableViewCell.swift */,
@@ -282,8 +292,10 @@
 		9498516E2B8491CE0054B8E8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				94A38AD32B8692A4003246D3 /* Attribute.swift */,
 				9431EC062B84AD7E004E8CFA /* Failure.swift */,
 				947EDDCE2B85DA63006CAB7E /* Filter.swift */,
+				94A38AD52B86AB14003246D3 /* Media.swift */,
 				9431EC0D2B84B824004E8CFA /* Oauth.swift */,
 				947EDDD02B85DE5F006CAB7E /* Option.swift */,
 				9431EC192B84FC3B004E8CFA /* Pagination.swift */,
@@ -463,6 +475,7 @@
 				949851782B84989E0054B8E8 /* PetsViewController.xib in Resources */,
 				947EDDC42B853B3F006CAB7E /* PetTableViewCell.xib in Resources */,
 				9498518C2B849DB00054B8E8 /* Localizable.strings in Resources */,
+				94A38AD22B867BC0003246D3 /* Pet.json in Resources */,
 				949851482B83FE810054B8E8 /* LaunchScreen.storyboard in Resources */,
 				949851452B83FE810054B8E8 /* Assets.xcassets in Resources */,
 			);
@@ -598,6 +611,7 @@
 				9431EC162B84BD33004E8CFA /* OauthManager.swift in Sources */,
 				9498517A2B84999F0054B8E8 /* Pet.swift in Sources */,
 				9431EC182B84C82E004E8CFA /* ParameterConstants.swift in Sources */,
+				94A38AD62B86AB14003246D3 /* Media.swift in Sources */,
 				9498517E2B849A240054B8E8 /* URLSession+Extension.swift in Sources */,
 				947EDDC82B85D623006CAB7E /* ImageConstants.swift in Sources */,
 				949851822B849C270054B8E8 /* UIView+Extension.swift in Sources */,
@@ -617,10 +631,12 @@
 				9431EC1A2B84FC3B004E8CFA /* Pagination.swift in Sources */,
 				947EDDC62B85D379006CAB7E /* SettingsViewController.swift in Sources */,
 				9431EC0E2B84B824004E8CFA /* Oauth.swift in Sources */,
+				94A38ACE2B867792003246D3 /* PetDetailsView.swift in Sources */,
 				9431EC132B84BC4D004E8CFA /* KeychainHelper.swift in Sources */,
 				947EDDCF2B85DA63006CAB7E /* Filter.swift in Sources */,
 				947EDDD52B861648006CAB7E /* UIApplication+Extension.swift in Sources */,
 				947EDDCD2B85DA5E006CAB7E /* Sort.swift in Sources */,
+				94A38AD42B8692A4003246D3 /* Attribute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@ class PetsViewModel {
     var error: PublishSubject<Error> = PublishSubject()
     
     private let session: URLSessionProtocol
-    private let oauth: Oauth
+    private let oauthManager: OauthManager?
     private let disposeBag = DisposeBag()
     
     var petsWrapperValue: PetsWrapper? {
@@ -22,9 +22,9 @@ class PetsViewModel {
     }
     
     init(session: URLSessionProtocol? = nil,
-         withOauth oauth: Oauth) {
+         withOauthManager oauthManager: OauthManager?) {
         self.session = session ?? URLSession(configuration: .default)
-        self.oauth = oauth
+        self.oauthManager = oauthManager
     }
     
     func fetchData(withHref href: String? = nil,
@@ -43,10 +43,9 @@ class PetsViewModel {
             return
         }
         
-        var request = URLRequest(url: url)
-        format(request: &request)
+        let request = URLRequest(url: url)
         
-        session.fetchData(withRequest: request, type: PetsWrapper.self)
+        session.fetchData(withRequest: request, type: PetsWrapper.self, withOauthManager: oauthManager)
             .subscribe(
                 onNext: { [weak self] petsWrapper in
                     if let petsWrapperValue = self?.petsWrapperValue {
@@ -70,10 +69,5 @@ class PetsViewModel {
                 }
             )
             .disposed(by: disposeBag)
-    }
-    
-    private func format(request: inout URLRequest) {
-        let parameters = [ParameterConstants.authorization: oauth.token_type + " " + oauth.access_token]
-        request.allHTTPHeaderFields = parameters
     }
 }

@@ -1,0 +1,105 @@
+{
+    "id": 70799220,
+    "organization_id": "NY602",
+    "url": "https://www.petfinder.com/cat/phoenix-70799220/ny/cortland/cny-snap-ny602/?referrer_id=2293b737-2bb0-4002-9539-19a88875a776&utm_source=api&utm_medium=partnership&utm_content=2293b737-2bb0-4002-9539-19a88875a776",
+    "type": "Cat",
+    "species": "Cat",
+    "breeds": {
+        "primary": "Domestic Short Hair",
+        "secondary": null,
+        "mixed": false,
+        "unknown": false
+    },
+    "colors": {
+        "primary": "Black",
+        "secondary": null,
+        "tertiary": null
+    },
+    "age": "Adult",
+    "gender": "Male",
+    "size": "Large",
+    "coat": "Short",
+    "attributes": {
+        "spayed_neutered": true,
+        "house_trained": true,
+        "declawed": false,
+        "special_needs": false,
+        "shots_current": true
+    },
+    "environment": {
+        "children": null,
+        "dogs": null,
+        "cats": true
+    },
+    "tags": [
+        "Friendly",
+        "Affectionate"
+    ],
+    "name": "Phoenix ",
+    "description": "Phoenix is 14lbs of awesomeness. He unfortunately came to us when he owner had to move to an assisted living...",
+    "organization_animal_id": null,
+    "photos": [
+        {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784"
+        },
+        {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/1/?bust=1708517782&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/1/?bust=1708517782&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/1/?bust=1708517782&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/1/?bust=1708517782"
+        },
+        {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/2/?bust=1708517783&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/2/?bust=1708517783&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/2/?bust=1708517783&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/2/?bust=1708517783"
+        },
+        {
+            "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/3/?bust=1708517783&width=100",
+            "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/3/?bust=1708517783&width=300",
+            "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/3/?bust=1708517783&width=600",
+            "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/3/?bust=1708517783"
+        }
+    ],
+    "primary_photo_cropped": {
+        "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784&width=300",
+        "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784&width=450",
+        "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784&width=600",
+        "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/70799220/4/?bust=1708517784"
+    },
+    "videos": [
+        {
+            "embed": "<iframe title=\"Video\" frameborder=\"0\" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen name=\"vidly-frame\" src=\"https://s.vid.ly/embeded.html?link=u8i6x5&autoplay=false\"><a target=\"_blank\" href=\"https://vid.ly/u8i6x5\"><img src=\"https://cf.cdn.vid.ly/u8i6x5/poster.jpg\" /></a></iframe>"
+        }
+    ],
+    "status": "adoptable",
+    "status_changed_at": "2024-02-21T12:16:26+0000",
+    "published_at": "2024-02-21T12:16:25+0000",
+    "distance": 43.4552,
+    "contact": {
+        "email": "info@cnysnap.org",
+        "phone": null,
+        "address": {
+            "address1": "17 Salisbury Street",
+            "address2": null,
+            "city": "Cortland",
+            "state": "NY",
+            "postcode": "13045",
+            "country": "US"
+        }
+    },
+    "_links": {
+        "self": {
+            "href": "/v2/animals/70799220"
+        },
+        "type": {
+            "href": "/v2/types/cat"
+        },
+        "organization": {
+            "href": "/v2/organizations/ny602"
+        }
+    }
+}

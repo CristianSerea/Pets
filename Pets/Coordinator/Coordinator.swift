@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol CoordinatorDelegate {
     func pushViewController(viewController: UIViewController?)
@@ -61,7 +62,9 @@ extension Coordinator: PetsViewControllerDelegate {
     }
     
     func didSelectPet(pet: Pet) {
-        
+        let rootView = PetDetailsView(withPet: pet)
+        let viewController = UIHostingController(rootView: rootView)
+        pushViewController(viewController: viewController)
     }
 }
 
@@ -88,13 +91,12 @@ extension Coordinator: OauthManagerDelegate {
         oauthManager?.loadOauth()
     }
     
-    func oauthDidFetch(error: Error) {
-        let viewController = navigationController?.viewControllers.last
-        viewController?.showAlertController(error: error)
-    }
-    
-    func oauthDidFetch(oauth: Oauth) {
-        let viewController = navigationController?.viewControllers.first as? PetsViewController
-        viewController?.setupViewModel(withOauth: oauth)
+    func oauthDidFetch(error: Error?) {
+        if let error = error {
+            UIApplication.shared.topViewController?.showAlertController(error: error)
+        } else {
+            let viewController = navigationController?.viewControllers.first as? PetsViewController
+            viewController?.setupViewModel(withOauthManager: oauthManager)
+        }
     }
 }
