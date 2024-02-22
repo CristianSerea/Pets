@@ -18,6 +18,6 @@ struct Filter {
     }
     
     var hint: String {
-        return isEnabled ? LocalizableConstants.selectLabelTitle : LocalizableConstants.disabledLabelTitle
+        return isEnabled ? LocalizableConstants.changeLabelTitle : LocalizableConstants.disabledLabelTitle
     }
 }

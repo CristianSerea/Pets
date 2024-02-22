@@ -30,7 +30,7 @@ struct Pet: Decodable {
 
 extension Pet {
     var formattedName: String {
-        return name + " " + "#" + String(id)
+        return name // + " " + "#" + String(id)
     }
     
     var speciesGender: String {

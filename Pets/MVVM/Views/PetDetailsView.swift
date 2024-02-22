@@ -260,10 +260,6 @@ struct DetailsSection: View {
 
 struct PetDetailsView_Preview: PreviewProvider {
     static var previews: some View {
-        let url = Bundle.main.url(forResource: "Pet", withExtension: "json")
-        let data = try! Data(contentsOf: url!)
-        let pet = try! JSONDecoder().decode(Pet.self, from: data)
-        
-        PetDetailsView(withPet: pet)
+        PetDetailsView(withPet: MockConstants.PetMock.pet)
     }
 }

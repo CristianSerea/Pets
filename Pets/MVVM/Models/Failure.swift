@@ -18,6 +18,6 @@ struct Failure: Error, Decodable, LocalizedError {
     }
     
     var isUnauthorized: Bool {
-        return status == 401
+        return [401, 403].contains(status)
     }
 }

@@ -42,10 +42,13 @@ class PetsViewController: UIViewController {
     
     private func setupNavigationBar() {
         navigationItem.title = LocalizableConstants.petsNavigationItemTitle
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: ImageConstants.Image.slider,
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(openSettings))
+        
+        let rightBarButtonItem = UIBarButtonItem(image: ImageConstants.Image.slider,
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(openSettings))
+        rightBarButtonItem.accessibilityIdentifier = ImageConstants.SystemName.slider
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     @objc private func openSettings() {
